@@ -68,43 +68,18 @@ const PlayerModal = ({
           style={getCardStyle(index)}
           onClick={(e) => e.stopPropagation()}
         >
-           <ReactPlayer
-            url={
-              
-                 `https://www.youtube.com/watch?v=${card.id.videoId}`
-               
-            }
-            playing={selectedCard === index}
-            className="player-modal-iframe"
-            width="100%"
-            height="100%"
-            controls={false}
-            muted={selectedCard !== index}
-            loop
-            config={{
-              youtube: {
-                playerVars: {
-                  autoplay: selectedCard === index?1:0,
-                  fs: 1,
-                  loop: 1,
-                  modestbranding: 1,
-                  rel: 0,
-                  showinfo: 0,
-                },
-              },
-            }}
-          />
-          {/* <iframe
+
+          <iframe
             title="YouTube Video"
             className="player-modal-iframe"
             style={{zIndex:'1'}}
             src={
               selectedCard === index
-                ? `https://www.youtube.com/embed/${card.videoId}?autoplay=1&fs=1&loop=1`
-                : `https://www.youtube.com/embed/${card.videoId}?autoplay=0&fs=1&loop=1&mute=1`
+                ? `https://www.youtube.com/embed/${card.id.videoId}?autoplay=1&fs=1&loop=1`
+                : `https://www.youtube.com/embed/${card.id.videoId}?autoplay=0&fs=1&loop=1&mute=1`
             }
             allowFullScreen
-          ></iframe> */}
+          ></iframe>
           <div
             className="descContainer"
             style={{ position: "absolute", bottom: 0, left: 0 }}
