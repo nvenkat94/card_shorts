@@ -1,16 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Cards from "../components/Cards";
 import PlayerModal from "../components/PlayerModal";
 import "./homepage.css";
-import img1 from "../images/img1.jpg";
-import img2 from "../images/img2.jpg";
-import img3 from "../images/img3.jpg";
-import img4 from "../images/img4.jpg";
-import img5 from "../images/img5.jpg";
-import img6 from "../images/img6.jpg";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
+import axios from "axios";
 
 const HomePage = () => {
   const [slider, setSlider] = useState(false);
@@ -18,6 +13,7 @@ const HomePage = () => {
   const listRef = useRef();
   const [openModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [cardArray,setCardArray]=useState([])
 
   const handleClick = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 50;
@@ -29,7 +25,7 @@ const HomePage = () => {
       setSlider(slider - 1);
       listRef.current.style.transform = `translateX(${250 + distance}px)`;
     }
-    if (direction === "right" && slider < 6) {
+    if (direction === "right" && slider < cardArray.length-5) {
       setSlider(slider + 1);
       listRef.current.style.transform = `translateX(${-250 + distance}px)`;
     }
@@ -37,82 +33,40 @@ const HomePage = () => {
   const handleNextVideo = () => {
     if (selectedCard < cardArray.length - 1) {
       setSelectedCard(selectedCard + 1);
+    } else if (selectedCard === cardArray.length - 1) {
+      setSelectedCard(0);
     }
   };
 
   const handlePrevVideo = () => {
     if (selectedCard > 0) {
       setSelectedCard(selectedCard - 1);
+    } else if (selectedCard === 0) {
+      setSelectedCard(cardArray.length - 1);
     }
   };
-  const cardArray = [
-    {
-      text: "Some text",
-      image: img1,
-      videoId: "5xgM1RAq9YY",
-      description: "Description1",
-    },
-    {
-      text: "Some text2",
-      image: img2,
-      videoId: "L0DWAVbdEaM",
-      description: "Description2",
-    },
-    {
-      text: "Some text3",
-      image: img3,
-      videoId: "AK4dgx60BRs",
-      description: "Description3",
-    },
-    {
-      text: "Some tex4",
-      image: img4,
-      videoId: "5xgM1RAq9YY",
-      description: "Description4",
-    },
-    {
-      text: "Some text5",
-      image: img5,
-      videoId: "L0DWAVbdEaM",
-      description: "Description5",
-    },
-    {
-      text: "Some text7",
-      image: img6,
-      videoId: "AK4dgx60BRs",
-      description: "Description6",
-    },
-    {
-      text: "Some text8",
-      image: img6,
-      videoId: "5xgM1RAq9YY",
-      description: "Description7",
-    },
-    {
-      text: "Some text9",
-      image: img6,
-      videoId: "L0DWAVbdEaM",
-      description: "Description8",
-    },
-    {
-      text: "Some text10",
-      image: img6,
-      videoId: "AK4dgx60BRs",
-      description: "Description9",
-    },
-    {
-      text: "Some text11",
-      image: img6,
-      videoId: "5xgM1RAq9YY",
-      description: "Description1",
-    },
-    {
-      text: "Some text12",
-      image: img6,
-      videoId: "5xgM1RAq9YY",
-      description: "Description1",
-    },
-  ];
+  
+
+  const fetchApi = async () => {
+    const channelId = 'UCQKOjx1qhwFf5qKRgH1WXsA';
+    const maxResults = 15;
+    const apiKey = 'AIzaSyCiOw1d3aQgf-y8K4RKv7rSEXClAl3jVV0';
+    const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=date&type=video,video.short&maxResults=${maxResults}&key=${apiKey}`;
+
+    try {
+      const response = await axios.get(apiUrl);
+      const data = response.data;
+      setCardArray(data.items)
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching API:', error);
+    }
+  };
+  useEffect(() => {
+
+    fetchApi()
+  
+  }, []);
   return (
     <div className="home">
       <Navbar />
@@ -136,9 +90,9 @@ const HomePage = () => {
                 setSelectedCard(index);
                 setOpenModal(!openModal);
               }}
-              style={{cursor:'pointer'}}
+              style={{ cursor: "pointer" }}
             >
-              <Cards imgSrc={ele.image} text={ele.text} index={index} />
+              <Cards imgSrc={ele.snippet.thumbnails.high.url} text={'Description'+index} index={index} />
             </div>
           ))}
         </div>
@@ -153,16 +107,15 @@ const HomePage = () => {
           }}
         />
         {openModal && (
-          <div >
+          <div>
             <PlayerModal
-            cardArray={cardArray}
-            selectedCard={selectedCard}
-            handleClose={() => setOpenModal(false)}
-            handleNextVideo={handleNextVideo}
-            handlePrevVideo={handlePrevVideo}
-          />
-            
-            </div>
+              cardArray={cardArray}
+              selectedCard={selectedCard}
+              handleClose={() => setOpenModal(false)}
+              handleNextVideo={handleNextVideo}
+              handlePrevVideo={handlePrevVideo}
+            />
+          </div>
         )}
       </div>
     </div>

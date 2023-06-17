@@ -1,21 +1,21 @@
 .player-modal-overlay {
   /* margin: auto; */
-  padding-top: 125px;
+  /* padding-top: 125px; */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 400px;
+  /* height: 400px; */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.808);
+  z-index: 70;
 }
 
 .player-modal-content {
-  margin-top: 100px;
   width: 400px;
-  /* height: 70%; */
   height: auto;
   position: relative;
   padding-bottom: 20%;
@@ -78,7 +78,44 @@
 }
 
 @media (max-width: 768px) {
-    .player-modal-content {
-      height: 90%;
-    }
+  .player-modal-content {
+    height: 90%;
   }
+}
+
+.player-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.player-modal-content.open {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 99;
+}
+
+.player-modal-content.previous {
+  width: 250px;
+  height: auto;
+  opacity: 0.5;
+  /* z-index: -1; */
+  padding-bottom: 10%;
+  padding-top: 10%;
+}
+
+.player-modal-content.next {
+  width: 250px;
+  height: auto;
+  left: 70%;
+  opacity: 0.5;
+  /* z-index: -1; */
+  padding-bottom: 10%;
+  padding-top: 10%;
+}
+
