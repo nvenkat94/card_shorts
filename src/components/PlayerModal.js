@@ -87,7 +87,7 @@ const PlayerModal = ({
             <h4>About Product</h4>
             {showDesc && (
               <p style={{ paddingLeft: "8px" }}>
-                {card.description || "Description"}
+                {card.snippet.title || "Description"}
               </p>
             )}
             <div className="showButton" style={{ width: "100%" }}>

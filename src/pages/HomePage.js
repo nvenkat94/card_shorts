@@ -92,7 +92,7 @@ const HomePage = () => {
               }}
               style={{ cursor: "pointer" }}
             >
-              <Cards imgSrc={ele.snippet.thumbnails.high.url} text={'Description'+index} index={index} />
+              <Cards imgSrc={ele.snippet.thumbnails.high.url} text={ele.snippet.title || 'Description'} index={index} />
             </div>
           ))}
         </div>
