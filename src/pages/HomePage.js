@@ -61,7 +61,7 @@ const HomePage = () => {
     {
       text: "Some text3",
       image: img3,
-      videoId: "5xgM1RAq9YY",
+      videoId: "AK4dgx60BRs",
       description: "Description3",
     },
     {
@@ -73,13 +73,13 @@ const HomePage = () => {
     {
       text: "Some text5",
       image: img5,
-      videoId: "5xgM1RAq9YY",
+      videoId: "L0DWAVbdEaM",
       description: "Description5",
     },
     {
       text: "Some text7",
       image: img6,
-      videoId: "5xgM1RAq9YY",
+      videoId: "AK4dgx60BRs",
       description: "Description6",
     },
     {
@@ -91,13 +91,13 @@ const HomePage = () => {
     {
       text: "Some text9",
       image: img6,
-      videoId: "5xgM1RAq9YY",
+      videoId: "L0DWAVbdEaM",
       description: "Description8",
     },
     {
       text: "Some text10",
       image: img6,
-      videoId: "5xgM1RAq9YY",
+      videoId: "AK4dgx60BRs",
       description: "Description9",
     },
     {
