@@ -57,19 +57,24 @@
   height: 30px;
 }
 .player-modal-navigation {
-  color: rgb(36, 31, 31);
   font-size: 100px;
-  background-color: rgba(0, 255, 255, 0.486);
+  cursor: pointer;
 }
 .player-modal-nav-right {
   top: 50%;
   position: absolute;
   right: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.37);
+  font-size: 100px;
 }
 .player-modal-nav-left {
   top: 50%;
   position: absolute;
-  left: 0
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.37);
+  font-size: 100px;
 }
 
 @media (max-width: 768px) {

@@ -136,6 +136,7 @@ const HomePage = () => {
                 setSelectedCard(index);
                 setOpenModal(!openModal);
               }}
+              style={{cursor:'pointer'}}
             >
               <Cards imgSrc={ele.image} text={ele.text} index={index} />
             </div>
